@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Conversor XML para DANFE (PDF) — 100% no navegador, sem cadastro, sem envio de arquivos. NF-e modelo 55." />
+  <title>XML → DANFE | Conversor Local</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">📄</span>
+        <span class="logo-text">XML<span class="logo-accent">Danfe</span></span>
+      </div>
+      <div class="badge-header">
+        100% no navegador · Sem cadastro
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Converter XML em <span class="highlight">DANFE</span></h1>
+      <p class="hero-subtitle">
+        Arraste XMLs de NF-e (modelo 55) e gere o DANFE em PDF direto no navegador.
+        Nenhum arquivo sai do seu computador.
+      </p>
+      <div class="hero-badge">
+        <span class="badge-icon">🔒</span>
+        Processamento 100% local · Privacidade total
+      </div>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="container main-grid">
+      <!-- Upload Card -->
+      <section class="card upload-card">
+        <div class="card-header">
+          <span class="card-icon">📤</span>
+          <h2>Seus arquivos XML</h2>
+        </div>
+
+        <div id="dropzone" class="dropzone">
+          <input type="file" id="fileInput" class="file-overlay" accept=".xml,application/xml,text/xml" multiple />
+          <div class="dropzone-content">
+            <div class="dropzone-icon">📁</div>
+            <p class="dropzone-title">Arraste até 50 XMLs aqui</p>
+            <p class="dropzone-hint">ou clique para selecionar</p>
+            <p class="dropzone-formats">NF-e modelo 55 · .xml</p>
+          </div>
+        </div>
+
+        <div id="fileList" class="file-list hidden"></div>
+
+        <div class="extra-actions">
+          <span class="btn-file">
+            <input type="file" id="fileInputBtn" class="file-overlay" accept=".xml,application/xml,text/xml" multiple />
+            Selecionar arquivos
+          </span>
+        </div>
+
+        <div class="actions">
+          <button id="btnConvert" class="btn btn-primary" disabled>
+            <span class="btn-icon">⚡</span>
+            Gerar DANFEs
+          </button>
+          <button id="btnClear" class="btn btn-ghost" disabled>
+            Limpar
+          </button>
+        </div>
+      </section>
+
+      <!-- Results Card -->
+      <section class="card results-card">
+        <div class="card-header">
+          <span class="card-icon">📋</span>
+          <h2>DANFEs gerados</h2>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">📭</div>
+          <p>Selecione os XMLs ao lado.<br />A conversão acontece na sua máquina.</p>
+        </div>
+
+        <div id="resultsList" class="results-list hidden"></div>
+
+        <div id="downloadAllWrap" class="download-all-wrap hidden">
+          <button id="btnDownloadAll" class="btn btn-secondary">
+            <span class="btn-icon">📦</span>
+            Baixar todos (ZIP)
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Features -->
+    <div class="container features">
+      <div class="feature">
+        <div class="feature-icon">🖥️</div>
+        <h3>100% local</h3>
+        <p>Leitura do XML e geração do PDF rodam no seu navegador. Nada é enviado a servidor.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚫</div>
+        <h3>Sem cadastro</h3>
+        <p>Nenhum formulário. Converta e baixe imediatamente.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🗑️</div>
+        <h3>Nada armazenado</h3>
+        <p>Fechou a aba, acabou. Nenhum dado fiscal fica guardado.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📑</div>
+        <h3>Layout oficial</h3>
+        <p>DANFE conforme Manual de Orientação do Contribuinte (NF-e).</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <strong>XML-Danfe</strong> — ferramenta pessoal · código aberto no GitHub
+      </p>
+      <p class="footer-note">
+        O DANFE gerado é representação gráfica do XML para conferência e arquivo.
+        O documento fiscal com validade jurídica é o próprio XML.
+        Notas de homologação saem marcadas como sem valor fiscal.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
