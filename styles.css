@@ -152,7 +152,8 @@ body {
   flex-direction: column;
   gap: 24px;
   margin-bottom: 40px;
-  max-width: 760px;
+  width: 100%;
+  max-width: 1100px;
 }
 
 .stats {
@@ -205,9 +206,10 @@ body {
 
 .result-dl {
   display: grid;
-  gap: 4px;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
   margin-top: 6px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 
