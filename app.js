@@ -298,3 +298,57 @@ if (fileInputBtn) fileInputBtn.addEventListener('change', () => onFileChange(fil
 btnConvert.addEventListener('click', convertAll);
 btnClear.addEventListener('click', clearAll);
 btnDownloadAll.addEventListener('click', downloadAllZip);
+
+const btnPaste = $('#btnPaste');
+const btnSample = $('#btnSample');
+const pasteWrap = $('#pasteWrap');
+const pasteArea = $('#pasteArea');
+const btnAddPaste = $('#btnAddPaste');
+
+if (btnPaste && pasteWrap) {
+  btnPaste.addEventListener('click', () => pasteWrap.classList.toggle('hidden'));
+}
+if (btnAddPaste && pasteArea) {
+  btnAddPaste.addEventListener('click', () => {
+    const xml = pasteArea.value.trim();
+    if (!xml.includes('<')) {
+      showToast('Cole o conteúdo XML da NF-e', 'error');
+      return;
+    }
+    if (state.files.length >= MAX_FILES) {
+      showToast(`Máximo de ${MAX_FILES} arquivos por vez`, 'error');
+      return;
+    }
+    state.files.push({
+      file: null,
+      name: `colado-${Date.now()}.xml`,
+      size: xml.length,
+      xml,
+    });
+    pasteArea.value = '';
+    pasteWrap.classList.add('hidden');
+    renderFileList();
+    updateButtons();
+    updateStats();
+    showToast('XML colado');
+  });
+}
+if (btnSample) {
+  btnSample.addEventListener('click', async () => {
+    try {
+      const res = await fetch('sample-nfe.xml');
+      const xml = await res.text();
+      if (state.files.some((f) => f.name === 'exemplo-nfe.xml')) {
+        showToast('Exemplo já carregado');
+        return;
+      }
+      state.files.push({ file: null, name: 'exemplo-nfe.xml', size: xml.length, xml });
+      renderFileList();
+      updateButtons();
+      updateStats();
+      showToast('Exemplo carregado — clique em Gerar DANFEs');
+    } catch {
+      showToast('Não foi possível carregar o exemplo', 'error');
+    }
+  });
+}

@@ -292,6 +292,38 @@ body {
 
 .extra-actions {
   margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.paste-wrap {
+  margin-top: 12px;
+}
+
+.paste-wrap textarea {
+  width: 100%;
+  min-height: 110px;
+  resize: vertical;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--navy-900);
+}
+
+.btn-navy {
+  margin-top: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--navy-900);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .btn-file {

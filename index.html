@@ -67,6 +67,13 @@
             <input type="file" id="fileInputBtn" class="file-overlay" accept=".xml,application/xml,text/xml" multiple />
             Selecionar arquivos
           </span>
+          <button type="button" id="btnPaste" class="btn btn-ghost">Colar XML</button>
+          <button type="button" id="btnSample" class="btn btn-ghost">Carregar exemplo</button>
+        </div>
+
+        <div id="pasteWrap" class="paste-wrap hidden">
+          <textarea id="pasteArea" placeholder="Cole aqui o conteúdo completo do XML da NF-e…"></textarea>
+          <button type="button" id="btnAddPaste" class="btn btn-navy">Adicionar XML colado</button>
         </div>
 
         <div class="actions">
