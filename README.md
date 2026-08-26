@@ -8,7 +8,7 @@ Repositório: [https://github.com/silvioalbqrq/XML-Danfe](https://github.com/sil
 
 ## Funcionalidades
 
-- Arraste ou selecione até **50 XMLs** de NF-e (modelo 55)
+- Arraste ou selecione até **200 XMLs** de NF-e (modelo 55)
 - Gera **DANFE em PDF** no layout oficial
 - Download individual ou **ZIP com todos**
 - Processamento **100% no cliente** (nada sobe para servidor)
@@ -37,7 +37,7 @@ A URL fica: `https://silvioalbqrq.github.io/XML-Danfe/`
 ## Limitações
 
 - Apenas **NF-e modelo 55**
-- Até 50 arquivos por conversão
+- Até 200 arquivos por conversão
 - O DANFE gerado é representação gráfica para conferência — o documento fiscal com validade jurídica é o XML
 
 ## Licença

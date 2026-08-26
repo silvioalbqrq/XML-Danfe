@@ -42,7 +42,7 @@
 
   <!-- Main -->
   <main class="main">
-    <div class="container main-grid">
+    <div class="container stack">
       <!-- Upload Card -->
       <section class="card upload-card">
         <div class="card-header">
@@ -54,7 +54,7 @@
           <input type="file" id="fileInput" class="file-overlay" accept=".xml,application/xml,text/xml" multiple />
           <div class="dropzone-content">
             <div class="dropzone-icon">📁</div>
-            <p class="dropzone-title">Arraste até 50 XMLs aqui</p>
+            <p class="dropzone-title">Arraste até 200 XMLs aqui</p>
             <p class="dropzone-hint">ou clique para selecionar</p>
             <p class="dropzone-formats">NF-e modelo 55 · .xml</p>
           </div>
@@ -87,9 +87,16 @@
           <h2>DANFEs gerados</h2>
         </div>
 
+        <div class="stats">
+          <div class="stat"><span class="stat-label">Arquivos lidos</span><strong id="statLidos">0</strong></div>
+          <div class="stat ok"><span class="stat-label">DANFEs prontos</span><strong id="statProntos">0</strong></div>
+          <div class="stat bad"><span class="stat-label">Não convertidos</span><strong id="statFalhas">0</strong></div>
+          <div class="stat"><span class="stat-label">Valor total</span><strong id="statTotal">R$ 0,00</strong></div>
+        </div>
+
         <div id="emptyState" class="empty-state">
           <div class="empty-icon">📭</div>
-          <p>Selecione os XMLs ao lado.<br />A conversão acontece na sua máquina.</p>
+          <p>Selecione os XMLs acima e clique em Gerar DANFEs.<br />A conversão acontece na sua máquina.</p>
         </div>
 
         <div id="resultsList" class="results-list hidden"></div>
@@ -97,7 +104,7 @@
         <div id="downloadAllWrap" class="download-all-wrap hidden">
           <button id="btnDownloadAll" class="btn btn-secondary">
             <span class="btn-icon">📦</span>
-            Baixar todos (ZIP)
+            Baixar todos os PDFs em ZIP
           </button>
         </div>
       </section>
