@@ -1,4 +1,4 @@
-import { DANFe } from 'https://cdn.jsdelivr.net/npm/node-sped-pdf@1.0.66/+esm';
+import { generateDanfePdf, parseNfe } from './danfe.js';
 
 const MAX_FILES = 200;
 
@@ -177,7 +177,8 @@ async function convertAll() {
       continue;
     }
     try {
-      const pdfBytes = await DANFe({ xml: item.xml });
+      const nfe = parseNfe(item.xml);
+      const pdfBytes = await generateDanfePdf(nfe);
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
       state.results.push({ ...info, name: item.name, pdfBlob: blob });
     } catch (err) {
