@@ -16,7 +16,7 @@ Repositório: [https://github.com/silvioalbqrq/XML-Danfe](https://github.com/sil
 ## Como usar
 
 1. Abra o site (ou `index.html` no navegador)
-2. Clique na área pontilhada ou em **Selecionar arquivos**
+2. Clique na área pontilhada para selecionar os XMLs
 3. Clique em **Gerar DANFEs**
 4. Baixe os PDFs individualmente ou em ZIP
 

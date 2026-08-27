@@ -522,12 +522,96 @@ body {
 }
 
 .results-list {
-  flex: 1;
   overflow-y: auto;
-  max-height: 320px;
+  max-height: calc(10 * 3.75rem);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+}
+
+.result-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 3.75rem;
+  padding: 0 8px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fff;
+}
+
+.result-row.error {
+  background: #fef2f2;
+}
+
+.result-compact {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.result-compact .line1 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--navy-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result-compact .muted {
+  margin-left: 8px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.result-compact .val {
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.result-compact .line2 {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result-compact .lbl {
+  color: #94a3b8;
+}
+
+.result-compact .dot {
+  margin: 0 6px;
+  color: #cbd5e1;
+}
+
+.result-compact .line3 {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-pdf {
+  height: 28px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 4px;
+  background: var(--navy-900);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.btn-pdf:hover {
+  background: var(--navy-800);
 }
 
 .result-item {

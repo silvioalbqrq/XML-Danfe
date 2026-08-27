@@ -10,7 +10,6 @@ const state = {
 const $ = (sel) => document.querySelector(sel);
 const dropzone = $('#dropzone');
 const fileInput = $('#fileInput');
-const fileInputBtn = $('#fileInputBtn');
 const fileList = $('#fileList');
 const btnConvert = $('#btnConvert');
 const btnClear = $('#btnClear');
@@ -200,37 +199,32 @@ function renderResults() {
     .map((r, i) => {
       if (r.error) {
         return `
-        <div class="result-item error">
-          <div class="result-info">
-            <div class="num">NF-e nº ${r.nNF || r.name}</div>
-            <div class="meta">${r.error}</div>
+        <div class="result-row error">
+          <div class="result-compact">
+            <div class="line1">NF-e ${r.nNF || r.name} · ${r.error}</div>
           </div>
         </div>`;
       }
       return `
-      <div class="result-item">
-        <div class="result-info">
-          <div class="num">NF-e nº ${r.nNF}${r.serie ? ` · série ${r.serie}` : ''}</div>
-          <dl class="result-dl">
-            <div>
-              <dt>Chave de acesso</dt>
-              <dd class="chave">${r.chave ? formatChave(r.chave) : '—'}</dd>
-            </div>
-            <div>
-              <dt>Data de emissão</dt>
-              <dd>${r.dhEmi ? formatDateTime(r.dhEmi) : '—'}</dd>
-            </div>
-            <div>
-              <dt>Destinatário</dt>
-              <dd>${r.dest || '—'}${r.vNF ? ` · R$ ${formatMoney(r.vNF)}` : ''}</dd>
-            </div>
-          </dl>
+      <div class="result-row">
+        <div class="result-compact">
+          <div class="line1">
+            NF-e ${r.nNF}${r.serie ? `/${r.serie}` : ''}
+            <span class="muted">${r.dhEmi ? formatDateTime(r.dhEmi) : '—'}</span>
+            ${r.vNF ? `<span class="val">R$ ${formatMoney(r.vNF)}</span>` : ''}
+          </div>
+          <div class="line2">
+            <span class="lbl">Emit.</span> ${r.emit || '—'}
+            <span class="dot">·</span>
+            <span class="lbl">Dest.</span> ${r.dest || '—'}
+          </div>
+          <div class="line3">${r.chave ? formatChave(r.chave) : '—'}</div>
         </div>
-        <button class="btn btn-sm btn-download" data-idx="${i}">Baixar PDF</button>
+        <button class="btn-pdf" data-idx="${i}">PDF</button>
       </div>`;
     })
     .join('');
-  resultsList.querySelectorAll('.btn-download').forEach((btn) => {
+  resultsList.querySelectorAll('.btn-pdf').forEach((btn) => {
     btn.addEventListener('click', () => downloadOne(+btn.dataset.idx));
   });
   if (state.results.some((r) => r.pdfBlob)) downloadAllWrap.classList.remove('hidden');
@@ -293,62 +287,8 @@ function onFileChange(input) {
   input.value = '';
 }
 fileInput.addEventListener('change', () => onFileChange(fileInput));
-if (fileInputBtn) fileInputBtn.addEventListener('change', () => onFileChange(fileInputBtn));
 
 btnConvert.addEventListener('click', convertAll);
 btnClear.addEventListener('click', clearAll);
 btnDownloadAll.addEventListener('click', downloadAllZip);
 
-const btnPaste = $('#btnPaste');
-const btnSample = $('#btnSample');
-const pasteWrap = $('#pasteWrap');
-const pasteArea = $('#pasteArea');
-const btnAddPaste = $('#btnAddPaste');
-
-if (btnPaste && pasteWrap) {
-  btnPaste.addEventListener('click', () => pasteWrap.classList.toggle('hidden'));
-}
-if (btnAddPaste && pasteArea) {
-  btnAddPaste.addEventListener('click', () => {
-    const xml = pasteArea.value.trim();
-    if (!xml.includes('<')) {
-      showToast('Cole o conteúdo XML da NF-e', 'error');
-      return;
-    }
-    if (state.files.length >= MAX_FILES) {
-      showToast(`Máximo de ${MAX_FILES} arquivos por vez`, 'error');
-      return;
-    }
-    state.files.push({
-      file: null,
-      name: `colado-${Date.now()}.xml`,
-      size: xml.length,
-      xml,
-    });
-    pasteArea.value = '';
-    pasteWrap.classList.add('hidden');
-    renderFileList();
-    updateButtons();
-    updateStats();
-    showToast('XML colado');
-  });
-}
-if (btnSample) {
-  btnSample.addEventListener('click', async () => {
-    try {
-      const res = await fetch('sample-nfe.xml');
-      const xml = await res.text();
-      if (state.files.some((f) => f.name === 'exemplo-nfe.xml')) {
-        showToast('Exemplo já carregado');
-        return;
-      }
-      state.files.push({ file: null, name: 'exemplo-nfe.xml', size: xml.length, xml });
-      renderFileList();
-      updateButtons();
-      updateStats();
-      showToast('Exemplo carregado — clique em Gerar DANFEs');
-    } catch {
-      showToast('Não foi possível carregar o exemplo', 'error');
-    }
-  });
-}
